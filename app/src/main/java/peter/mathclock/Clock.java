@@ -17,7 +17,7 @@ public class Clock {
     private final ViewItem minutesView;
     private final ViewItem secondsView;
     private final ListMultimap<Integer, Integer> mapping;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public Clock(ImageView hoursView, ImageView minutesView, ImageView secondsView, ListMultimap<Integer, Integer> mapping) {
         this.hoursView = new ViewItem(hoursView);

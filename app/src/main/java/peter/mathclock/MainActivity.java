@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class UpdateTask implements Runnable {
 
-        private DateTimeFormatter format = DateTimeFormat.forPattern("kk:mm:ss");
+        private final DateTimeFormatter format = DateTimeFormat.forPattern("kk:mm:ss");
 
         @UiThread
         @Override
