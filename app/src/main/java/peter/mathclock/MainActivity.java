@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
         ListMultimap<Integer, Integer> mapping = loadMapping();
 
         clock = new Clock(getImage(R.id.clockHours), getImage(R.id.clockMinutes), getImage(R.id.clockSeconds), mapping);
-
         clockText = (TextView) findViewById(R.id.clockText);
-
+        updateTask = new UpdateTask();
         handler = new Handler();
+
         schedule();
     }
 
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void schedule() {
-        updateTask = new UpdateTask();
         handler.postDelayed(updateTask, 1000);
     }
 
