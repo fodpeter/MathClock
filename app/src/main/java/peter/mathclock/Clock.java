@@ -13,16 +13,16 @@ import java.util.Random;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Clock {
-    private final ImageView hoursView;
-    private final ImageView minutesView;
-    private final ImageView secondsView;
+    private final ViewItem hoursView;
+    private final ViewItem minutesView;
+    private final ViewItem secondsView;
     private final ListMultimap<Integer, Integer> mapping;
     private Random random = new Random();
 
     public Clock(ImageView hoursView, ImageView minutesView, ImageView secondsView, ListMultimap<Integer, Integer> mapping) {
-        this.hoursView = checkNotNull(hoursView);
-        this.minutesView = checkNotNull(minutesView);
-        this.secondsView = checkNotNull(secondsView);
+        this.hoursView = new ViewItem(hoursView);
+        this.minutesView = new ViewItem(minutesView);
+        this.secondsView = new ViewItem(secondsView);
         this.mapping = checkNotNull(mapping);
     }
 
@@ -32,15 +32,38 @@ public class Clock {
         show(secondsView, date.getSecondOfMinute());
     }
 
-    private void show(ImageView view, int n) {
-        List<Integer> closestList = ClosestSelector.getClosestList(mapping, n);
-        int id;
-        if (!closestList.isEmpty()) {
-            id = closestList.get(random.nextInt(closestList.size()));
-        } else {
-            id = 0;
+    private void show(ViewItem view, int n) {
+        if (n != view.getLastNumber()) {
+            List<Integer> closestList = ClosestSelector.getClosestList(mapping, n);
+            int id;
+            if (!closestList.isEmpty()) {
+                id = closestList.get(random.nextInt(closestList.size()));
+            } else {
+                id = 0;
+            }
+            view.setLastNumber(n);
+            view.setImageResource(id);
         }
-        view.setImageResource(id);
     }
 
+    private static class ViewItem {
+        private final ImageView view;
+        private int lastNumber;
+
+        public ViewItem(ImageView view) {
+            this.view = checkNotNull(view);
+        }
+
+        public int getLastNumber() {
+            return lastNumber;
+        }
+
+        public void setLastNumber(int lastNumber) {
+            this.lastNumber = lastNumber;
+        }
+
+        public void setImageResource(int id) {
+            view.setImageResource(id);
+        }
+    }
 }
