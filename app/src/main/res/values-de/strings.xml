@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Math Uhr</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="descriptionHours">Uhren</string>
+    <string name="descriptionMinutes">Minuten</string>
+    <string name="descriptionSeconds">Sekunden</string>
+    <string name="divider">:</string>
+    <string name="title">Die Zeit ist:</string>
+</resources>

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MathClock</string>
     <string name="action_settings">Settings</string>
+    <string name="divider">:</string>
+    <string name="title">The time is:</string>
+    <string name="descriptionSeconds" >Seconds</string>
+    <string name="descriptionMinutes" >Minutes</string>
+    <string name="descriptionHours">Hours</string>
 </resources>

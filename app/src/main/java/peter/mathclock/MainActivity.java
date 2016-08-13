@@ -2,6 +2,7 @@ package peter.mathclock;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,14 +18,17 @@ import android.widget.TextView;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListMultimap<Integer, Integer> mapping;
-    private ImageView image;
+    private Clock clock;
     private TextView clockText;
     private UpdateTask updateTask;
     private Handler handler;
@@ -46,15 +50,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mapping = loadMapping();
+        ListMultimap<Integer, Integer> mapping = loadMapping();
 
-        image = (ImageView) findViewById(R.id.imageView);
+        clock = new Clock(getImage(R.id.clockHours), getImage(R.id.clockMinutes), getImage(R.id.clockSeconds), mapping);
 
         clockText = (TextView) findViewById(R.id.clockText);
-        clockText.setText("onCreate");
 
         handler = new Handler();
         schedule();
+    }
+
+    private ImageView getImage(@IdRes int id) {
+        return (ImageView) findViewById(id);
     }
 
     private void schedule() {
@@ -87,15 +94,14 @@ public class MainActivity extends AppCompatActivity {
 
     private class UpdateTask implements Runnable {
 
+        private DateTimeFormatter format = DateTimeFormat.mediumTime();
+
         @UiThread
         @Override
         public void run() {
-            do {
-                state = (state + 1) % 12;
-            }
-            while (!mapping.containsKey(state));
-            image.setImageResource(mapping.get(state).get(0));
-            clockText.setText("scheduled " + state);
+            LocalTime now = LocalTime.now();
+            clock.show(now);
+            clockText.setText(format.print(now));
             schedule();
         }
     }

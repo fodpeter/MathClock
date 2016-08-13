@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Matek óra</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="title">A pontos idő:</string>
+    <string name="divider">:</string>
+    <string name="descriptionHours">Órák</string>
+    <string name="descriptionMinutes">Percek</string>
+    <string name="descriptionSeconds">Másodpercek</string>
+</resources>
