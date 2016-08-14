@@ -43,7 +43,7 @@ class MappingParser {
             if (id != 0) {
                 mapping.put(Integer.valueOf(mappingProp.getProperty(file)), id);
             } else {
-                Log.w("mapping", "cannot find " + file);
+                //Log.w("mapping", "cannot find " + file);
             }
         }
         return mapping;
