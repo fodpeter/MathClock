@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class ClosestSelector {
+class ClosestSelector {
 
     public static List<Integer> getClosestList(ListMultimap<Integer, Integer> mapping, int n) {
         List<Integer> list = mapping.get(getClosest(mapping.keySet(), n));

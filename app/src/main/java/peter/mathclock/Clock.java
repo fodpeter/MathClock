@@ -12,7 +12,7 @@ import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class Clock {
+class Clock {
     private final ViewItem hoursView;
     private final ViewItem minutesView;
     private final ViewItem secondsView;
