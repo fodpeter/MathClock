@@ -3,27 +3,22 @@ package peter.mathclock;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
-import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 public class MainActivity extends AppCompatActivity {
+
+    private final DateTimeFormatter format = DateTimeFormat.forPattern("kk:mm:ss");
 
     private Clock clock;
     private TextView clockText;
@@ -37,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListMultimap<Integer, Integer> mapping = loadMapping();
+        MappingParser parser = new MappingParser(this);
+        ListMultimap<Integer, Integer> mapping = parser.loadMapping("mapping.properties");
 
         clock = new Clock(getImage(R.id.clockHours), getImage(R.id.clockMinutes), getImage(R.id.clockSeconds), mapping);
         clockText = (TextView) findViewById(R.id.clockText);
         updateTask = new UpdateTask();
         handler = new Handler();
 
+        updateClock();
         schedule();
     }
 
@@ -51,45 +48,22 @@ public class MainActivity extends AppCompatActivity {
         return (ImageView) findViewById(id);
     }
 
+    private class UpdateTask implements Runnable {
+        @Override
+        public void run() {
+            updateClock();
+            schedule();
+        }
+    }
+
     private void schedule() {
         handler.postDelayed(updateTask, 1000);
     }
 
-    private ListMultimap<Integer, Integer> loadMapping() {
-        try {
-            InputStream inputStream = getBaseContext().getAssets().open("mapping.properties");
-            Properties mappingProp = new Properties();
-            mappingProp.load(inputStream);
-            ListMultimap<Integer, Integer> mapping = ArrayListMultimap.create(12, mappingProp.size() / 12 + 1);
-            for (String file : mappingProp.stringPropertyNames()) {
-                int id = getResources().getIdentifier(file, "drawable", getPackageName());
-                if (id != 0) {
-                    mapping.put(Integer.valueOf(mappingProp.getProperty(file)), id);
-                } else {
-                    Log.w("mapping", "cannot find " + file);
-                }
-            }
-            if (mapping.isEmpty()) {
-                throw new IllegalStateException("cannot find image resources");
-            }
-            return mapping;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private class UpdateTask implements Runnable {
-
-        private final DateTimeFormatter format = DateTimeFormat.forPattern("kk:mm:ss");
-
-        @UiThread
-        @Override
-        public void run() {
-            LocalTime now = LocalTime.now();
-            clock.show(now);
-            clockText.setText(format.print(now));
-            schedule();
-        }
+    private void updateClock() {
+        LocalTime now = LocalTime.now();
+        clock.show(now);
+        clockText.setText(format.print(now));
     }
 
     @Override
