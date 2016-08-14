@@ -48,7 +48,7 @@ class Clock {
 
     private static class ViewItem {
         private final ImageView view;
-        private int lastNumber;
+        private int lastNumber = -1;
 
         public ViewItem(ImageView view) {
             this.view = checkNotNull(view);
