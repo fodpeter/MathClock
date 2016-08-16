@@ -18,7 +18,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final DateTimeFormatter format = DateTimeFormat.forPattern("kk:mm:ss");
+    private final DateTimeFormatter format = DateTimeFormat.forPattern("HH:mm:ss");
 
     private Clock clock;
     private TextView clockText;
