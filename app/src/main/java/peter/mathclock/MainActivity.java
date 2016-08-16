@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
         clockText = (TextView) findViewById(R.id.clockText);
         updateTask = new UpdateTask();
         handler = new Handler();
-
-        updateClock();
-        schedule();
     }
 
     private ImageView getImage(@IdRes int id) {
@@ -49,10 +46,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class UpdateTask implements Runnable {
+
+        private boolean paused;
+
         @Override
         public void run() {
-            updateClock();
-            schedule();
+            if (!paused) {
+                updateClock();
+                schedule();
+            }
+        }
+
+        public void pause() {
+            this.paused = true;
+        }
+
+        public void start() {
+            this.paused = false;
+            run();
         }
     }
 
@@ -86,5 +97,29 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateTask.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateTask.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        updateTask.pause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateTask.start();
     }
 }
