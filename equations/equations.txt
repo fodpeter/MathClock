@@ -1,12 +1,5 @@
-#https://viereck.ch/latex-to-svg/
-#http://www.codecogs.com/latex/eqneditor.php
-
-#http://latex.codecogs.com/png.latex?%5Cdpi%7B300%7D%202%5E%7B01%7D
-#http://latex.codecogs.com/png.latex?%5Cdpi%7B600%7D%202%5E%7B01%7D
-#http://latex.codecogs.com/svg.latex?%5Cdpi%7B300%7D%202%5E%7B01%7D
-
-#pis=[1:50]*pi
-#pdiff=[[1:50];abs(round(pis)-pis);pis]'
+# http://latex.codecogs.com/png.latex?%5Cdpi%7B300%7D%202%5E%7B01%7D
+# http://latex.codecogs.com/svg.latex?%5Cdpi%7B300%7D%202%5E%7B01%7D
 
 0=\pi^{0}-1
 0=\lim_{x\to\infty}\frac{1}{x}
