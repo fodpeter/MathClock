@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+
+    <!-- The image resource links are generated, so lint cannot detect them as unused -->
+    <issue id="UnusedResources" severity="ignore"/>
+
+    <!-- the current image generator cdoes not support all resolutions -->
+    <issue id="IconDipSize" severity="informational"/>
+    <issue id="IconMissingDensityFolder" severity="informational"/>
+
+</lint>
