@@ -2,6 +2,9 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
+addons:
+  sonarqube: true
+
 android:
   components:
     - platform-tools
@@ -22,4 +25,6 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script: "./gradlew build connectedCheck --stacktrace"
+script:
+  - "./gradlew build connectedCheck --stacktrace"
+  - sonar-scanner -Dsonar.login=$SONAR_TOKEN
