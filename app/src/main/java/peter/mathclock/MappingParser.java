@@ -31,7 +31,7 @@ class MappingParser {
             }
             return mapping;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException("read error " + filename, e);
         }
     }
 
@@ -42,8 +42,6 @@ class MappingParser {
             int id = activity.getResources().getIdentifier(file, "drawable", activity.getPackageName());
             if (id != 0) {
                 mapping.put(Integer.valueOf(mappingProp.getProperty(file)), id);
-            } else {
-                //Log.w("mapping", "cannot find " + file);
             }
         }
         return mapping;

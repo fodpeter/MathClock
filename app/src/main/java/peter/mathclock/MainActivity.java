@@ -57,24 +57,25 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        public void pause() {
+        void pause() {
             this.paused = true;
         }
 
-        public void start() {
+        void start() {
             this.paused = false;
             run();
         }
-    }
 
-    private void schedule() {
-        handler.postDelayed(updateTask, 1000);
-    }
+        private void schedule() {
+            handler.postDelayed(updateTask, 1000);
+        }
 
-    private void updateClock() {
-        LocalTime now = LocalTime.now();
-        clock.show(now);
-        clockText.setText(format.print(now));
+        private void updateClock() {
+            LocalTime now = LocalTime.now();
+            clock.show(now);
+            clockText.setText(format.print(now));
+        }
+
     }
 
     @Override
@@ -82,21 +83,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

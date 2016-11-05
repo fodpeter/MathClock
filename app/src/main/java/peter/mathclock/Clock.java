@@ -50,19 +50,19 @@ class Clock {
         private final ImageView view;
         private int lastNumber = -1;
 
-        public ViewItem(ImageView view) {
+        private ViewItem(ImageView view) {
             this.view = checkNotNull(view);
         }
 
-        public int getLastNumber() {
+        private int getLastNumber() {
             return lastNumber;
         }
 
-        public void setLastNumber(int lastNumber) {
+        private void setLastNumber(int lastNumber) {
             this.lastNumber = lastNumber;
         }
 
-        public void setImageResource(int id) {
+        private void setImageResource(int id) {
             view.setImageResource(id);
         }
     }
