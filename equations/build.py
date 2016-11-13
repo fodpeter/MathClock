@@ -23,7 +23,7 @@ def main():
         os.mkdir(outputDir)
     else:
         for filename in glob(outputDir + "/*/*.png"):
-            os.remove(filename);
+            os.remove(filename)
         if os.path.exists(mappingFile):
             os.remove(mappingFile)
     dpis = [300, 600]
@@ -33,7 +33,7 @@ def main():
             os.mkdir(dir)
     with open(mappingFile, 'w') as mapping:
         for k, v in sorted(equations.items()):
-            ki = 0;
+            ki = 0
             for equation in sorted(v):
                 print('converting' + str(k) + '  =  ' + equation)
                 filename = 'eq' + str(k) + '_' + str(ki)
@@ -45,7 +45,7 @@ def main():
 
 def convertAndWrite(outputDir, filename, w, dpi):
     data = convert(dpi, w)
-    writeImage(outputDir + '/' + str(dpi) + '/' + filename + '.png', data);
+    writeImage(outputDir + '/' + str(dpi) + '/' + filename + '.png', data)
 
 
 def writeImage(filename, data):
