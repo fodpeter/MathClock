@@ -25,7 +25,7 @@ if (file(keystorePropertiesFile).exists()) {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "peter.mathclock"
         minSdkVersion 16
@@ -51,9 +51,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-annotations:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:support-annotations:27.0.2'
     compile 'com.google.guava:guava:20.0'
     compile 'joda-time:joda-time:2.9.4'
 }
